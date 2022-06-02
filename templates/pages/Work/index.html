@@ -1,0 +1,92 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<!-- ====== Blog Section Start -->
+
+<section class="pt-20 lg:pt-[120px] pb-10 lg:pb-20">
+  <div class="container">
+    <div class="flex flex-wrap justify-center -mx-4">
+      <div class="w-full px-4">
+        <div class="text-center mx-auto mb-[60px] lg:mb-20 max-w-[510px]">
+          <h2
+            class="font-bold text-3xl sm:text-4xl md:text-[40px] text-dark mb-4"
+          >
+            Buscar mis trabajos
+          </h2>
+          
+        </div>
+      </div>
+    </div> 
+    <form method="get">   
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+      <div class="relative">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <input type="search" name="search" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ingrese su código" required>
+          <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+      </div>
+  </form>
+    <div class="flex flex-wrap -mx-4">
+      {% for post in posts %}
+      <div class="w-full md:w-1/2 lg:w-1/3 px-4">
+        <div class="max-w-[370px] mx-auto mb-10">
+           <div class="rounded overflow-hidden mb-8">
+           <img
+              src="{{post.Residencia.image.image.url}}" 
+              class="w-full"
+              style="height: 300;"
+               />
+                <br>
+            {% if post.state.id == 1 or post.state.id == 3 %}
+                  <span class="rounded-full text-center  py-1 text-white text-xs leading-loose font-semibold mb-1" style="background-color: rgb(101 163 13);">
+                  &nbsp Estado: {{post.state}} &nbsp  
+                  </span>        
+            {% endif %}
+            {% if  post.state.id == 2 %}
+                  <span class="rounded-full text-center  py-1 text-white text-xs leading-loose font-semibold mb-1" style="background-color: rgb(234 179 8);">
+                  &nbsp Estado: {{post.state}} &nbsp  
+                  </span>        
+            {% endif %}
+            {% if post.state.id == 4 %}
+                  <span class="rounded-full text-center  py-1 text-white text-xs leading-loose font-semibold mb-1" style="background-color: rgb(185 28 28);">
+                  &nbsp Estado: {{post.state}} &nbsp  
+                  </span>        
+            {% endif %}
+           
+            <h3>
+              <a
+                href="javascript:void(0)"
+                class="font-semibold text-xl sm:text-2xl lg:text-xl xl:text-2xl mb-4 inline-block text-dark hover:text-primary"
+              >
+                {{post.titulo}}
+              </a>
+              <div class="py-2">
+                <div class="grid grid-cols-6 gap-1">
+             {% for doc in post.Doc_propuesta.all %}
+              <a href="{{doc.Document.url}}" download="text">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAADjklEQVRoge2ZW0hUQRjHf+OeNc2o1CIzI9cKKiWKgq4PhmWXB3swu0FREFFQFgQlXajHCoKigiwDCzGzhygr0S5GFyQpFbsYud0oyaCsLEndtdPDJOu2m7q7Zzwb+IflzMx+M//vxzlnZnYW+tSngCS6C9CXJehKnHUOiMJXWYEOE2JELr5KjxoOgh360oT9gY5lCkD7luPo0bGGQJgCQOQw2jOPGQJhDgAYBmEeABgCYS4ABAxhPgAEBBEcAOA3RPAAgF8QwQUAHhDdhWu9kZOHaeYsw8YKvjvgo/oAzJYagHFT4VAJ5D6GJZlKLDqkBmDtPhgxBsL6Q3omxIxSYgOqAGJHu8pCgC1JiQ2oAmhpVjKsN6kBePPMvf7loxIbUAVQVeYq6zq8tyuxAVUA94vA0SrL9S/hx1clNqAK4NsneHhDlp1tINQtN+pG7ph54ifAwjXKbNQAjJ0s536nQ9aXb3OfWg2UGoBZafJamgf3LkFoGGSdhsFDDbcyfjsdHgGz0+Tsc7MAGj9A3Fj5KO04DfkHYbgNYhPAGirj6iol6KRkz/HOv+plgJQVMGAw1FZAvV1uKWorJIAtEXad8ewzdwUkzoQHxT7bGXs2ag2FI7chahi8rIGIgRAT7/re6QDN6r1vWwsckRu/1GrvltfzczzyNe4OWCyweINMHmD0RHn98Boqb0FlGbx4BPNXQ/pmCB/g3r+2wi/bwAGEgNmL3XedrT+h/CrcOAf2avf4KzlQVghTUuRjZe0ntx73LkPSjF4GGBoHGw5A4nRX23s77M2A5qZ/92tugjsX5SdA+Q8wajzszIVBQ1xtv9ohO6vr5A2W/wAbD7onD1B0CuqqetZ/Sorf1p3l/0IWHeteryiBgkMBpuO7/J9Gpy2AVbvk1FmaB5dPunagPdHkZAixcPidzrXPPe/mJiGyzfuPLCoGbIk4ddhu13ni4484AeWWL+FzzDtWaWyAj+/QBOyOhyH/WN+8SQganJqWUVx8tNXcc6H6Omj6TJRVsMcmsPYsG4cQLL119kQ9mH2wpevw+im0tTC+P2wd2X0XAZtK8nLudtTNP5lzOsBeA7/amRcpWBTdRawQ2aX5OSc7N5kPAPDzO7x9DsCmOEFShGeIgHKtMWyLl/bgU3LGmhirpj1EMAL+vLQWbWrHc99ZwXEH/tLtC7kNeghLgFb+emn/K6WuXLc+deW69V3F/AarGxedK81pDAAAAABJRU5ErkJggg=="/>
+              
+               </a>
+              
+            
+              {% endfor %}
+            </div>
+          </div>
+            
+            </h3>
+            <p class="text-base text-body-color">{{post.Description|safe}}</p>
+            
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock content %} {% block right_sidebar %} {% endblock right_sidebar %}
+{%block footer %} {% endblock footer %}
+{% block javascript %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock javascript %}

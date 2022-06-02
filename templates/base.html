@@ -1,0 +1,94 @@
+{% load static %}
+
+<html lang="en">
+  <head>
+    <style type="text/css">
+      .post {
+        width: 90%%;
+      }
+
+      @media (min-width: 640px) {
+        .post {
+          max-width: 80%;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .post {
+          max-width: 80%;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .post {
+          max-width: 33.33%;
+        }
+      }
+
+      @media (min-width: 1280px) {
+        .post {
+          width: 80%;
+        }
+      }
+
+      @media (min-width: 1536px) {
+        .post {
+          max-width: 80%;
+        }
+      }
+    </style>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- AlpineJS -->
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!--Boxicons-->
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!--JQuery-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    {% block extra_head %}{% endblock extra_head %}
+    <title>{% block title %}{% endblock title %}</title>
+  </head>
+
+  <body class="bg-gray-100 dark:bg-gray-800 justify-center">
+    {% block navbar %} {% endblock navbar %}
+
+    <div class="flex justify-center h-screen">
+      <!--left sidebar-->
+      <div
+        class="w-1/5 pt-16 hidden h-full flex-col fixed top-0px left-0 scrollbar-hide"
+      >
+        {% block left_sidebar %} {% endblock left_sidebar %}
+      </div>
+
+      <!--main content-->
+      <div class="pt-32 lg:pt-16 px-2 post">
+        {% block content %} {% endblock content %}
+      </div>
+
+      <!--right content-->
+      <div class="w-1/5 pt-16 h-full hidden px-4 fixed top-0 right-0">
+        {% block right_sidebar %} {% endblock right_sidebar %}
+      </div>
+    </div>
+
+    <!--FOOTER-->
+    {% block footer %} {% endblock footer %}
+  </body>
+</html>
